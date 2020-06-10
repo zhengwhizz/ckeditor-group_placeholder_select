@@ -72,10 +72,21 @@ CKEDITOR.plugins.add("group_placeholder_select", {
       if (typeof config.placeholders[i] == "object") {
         hasGroup = true;
         var options = [];
-        config.placeholders[i].options.forEach((option) => {
-          var placeholder = config.format.replace("%placeholder%", option);
-          options.push([placeholder, option, option]);
-        });
+        for (var j = 0; j < config.placeholders[i].options.length; j++) {
+          var placeholder = config.format.replace(
+            "%placeholder%",
+            config.placeholders[i].options[j]
+          );
+          options.push([
+            placeholder,
+            config.placeholders[i].options[j],
+            config.placeholders[i].options[j],
+          ]);
+        }
+        // config.placeholders[i].options.forEach((option) => {
+        //   var placeholder = config.format.replace("%placeholder%", option);
+        //   options.push([placeholder, option, option]);
+        // });
         placeholders.push({
           group: config.placeholders[i].group,
           options: options,
@@ -132,9 +143,16 @@ CKEDITOR.plugins.add("group_placeholder_select", {
             );
           } else {
             this.startGroup(placeholders[i].group);
-            placeholders[i].options.forEach((option) => {
-              this.add(option[0], option[1], option[2]);
-            });
+            for (var j in placeholders[i].options) {
+              this.add(
+                placeholders[i].options[j][0],
+                placeholders[i].options[j][1],
+                placeholders[i].options[j][2]
+              );
+            }
+            // placeholders[i].options.forEach((option) => {
+            //   this.add(option[0], option[1], option[2]);
+            // });
           }
         }
       },
