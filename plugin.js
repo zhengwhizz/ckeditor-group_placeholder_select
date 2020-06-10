@@ -94,22 +94,34 @@ CKEDITOR.plugins.add("group_placeholder_select", {
     }
     // add the menu to the editor
     editor.ui.addRichCombo("group_placeholder_select", {
-      label: editor.lang.group_placeholder_select.toolbar,
-      title: editor.lang.group_placeholder_select.toolbar,
-      voiceLabel: editor.lang.group_placeholder_select.toolbar,
+      label: editor.lang.group_placeholder_select
+        ? editor.lang.group_placeholder_select.toolbar
+        : "占位符",
+      title: editor.lang.group_placeholder_select
+        ? editor.lang.group_placeholder_select.toolbar
+        : "占位符",
+      voiceLabel: editor.lang.group_placeholder_select
+        ? editor.lang.group_placeholder_select.toolbar
+        : "占位符",
       className: "cke_format",
       multiSelect: false,
       panel: {
         css: []
           .concat(editor.config.contentsCss)
           .concat(CKEDITOR.skin.getPath("editor")),
-        voiceLabel: editor.lang.group_placeholder_select.toolbar,
+        voiceLabel: editor.lang.group_placeholder_select
+          ? editor.lang.group_placeholder_select.toolbar
+          : "占位符",
       },
 
       init: function() {
         if (hasGroup) {
         } else {
-          this.startGroup(editor.lang.group_placeholder_select.label);
+          this.startGroup(
+            editor.lang.group_placeholder_select
+              ? editor.lang.group_placeholder_select.label
+              : "请选择"
+          );
         }
         for (var i in placeholders) {
           if (placeholders[i] instanceof Array) {
